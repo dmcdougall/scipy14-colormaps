@@ -1,0 +1,13 @@
+Title:
+How to choose a good colour map
+
+Abstract:
+Representing data through colours is a very common approach to conveying
+important information to an audience.  This is done throughout all fields of
+science and stakes a claim in the commerical and marketing realm as well.  In
+this talk, we suggest some best practices scientists should consider when
+deciding how they should present their results.  We look at some examples of
+colourmaps that can easily be misinterpreted, making reference to an in-depth
+study conducted by Rogowitz and Treinish [1].  We conclude by suggesting some
+best practices scientists should consider while choosing how to represent their
+results and we list some open source tools that aid making such choices.
