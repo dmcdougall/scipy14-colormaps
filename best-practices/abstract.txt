@@ -2,12 +2,17 @@ Title:
 How to choose a good colour map
 
 Abstract:
+
 Representing data through colours is a very common approach to conveying
-important information to an audience.  This is done throughout all fields of
-science and stakes a claim in the commerical and marketing realm as well.  In
-this talk, we suggest some best practices scientists should consider when
-deciding how they should present their results.  We look at some examples of
-colourmaps that can easily be misinterpreted, making reference to an in-depth
-study conducted by Rogowitz and Treinish [1].  We conclude by suggesting some
-best practices scientists should consider while choosing how to represent their
-results and we list some open source tools that aid making such choices.
+important information to an audience.  This is done throughout all fields in
+the scientific community and stakes a claim in the commercial and marketing
+realm as well.  Colour maps and contour maps are the preferred way for
+scientists to visualise three-dimensional data in two dimensions.  Research has
+shown that the choice of colourmap is crucial since the human brain
+interpolates hue poorly.  We suggest some best practices scientists should
+consider when deciding how they should present their results.  Specifically, we
+look at some examples of colourmaps that can easily be misinterpreted, making
+reference to an in-depth supportive study, and suggest alternative approaches
+to improve them.  We conclude by listing some open source tools that aid making
+good colourmap choices.  Kristen Thyng's talk on perception of colourmaps in
+matplotlib is an excellent follow-on from this.
