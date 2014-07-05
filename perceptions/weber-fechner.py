@@ -183,4 +183,4 @@ fig.savefig('figures/albers-bw.png')
 x = np.linspace(0.0, 1.0, 100)
 
 L = np.zeros(100)
-L[1:] = 2**(x-1)
+L[1:] = 2**(x[-1)
