@@ -111,7 +111,6 @@
 \end{frame}
 
 \begin{frame}[t]\frametitle{Improvement to Binary Colormap?}
-    DO GEOMETRIC BINARY COLORMAP
     \begin{figure}[htbp]
         \centering
         \only<1>{\includegraphics[width=\textwidth]{figures/lightness-sequential}}
@@ -119,17 +118,49 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]\frametitle{Harmonic Colors}
+% \begin{frame}[t]\frametitle{Harmonic Colors}
     
-MAYBE DO THIS TO INCLUDE HUE
+% MAYBE DO THIS TO INCLUDE HUE
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}[t]\frametitle{Printing to Grey Scale}
 % MATTERS ESPECIALLY FOR DIVERGING COLORMAPS AS LONG AS LIGHTNESS IS MONOTONICALLY INCREASING IN SEQUENTIAL COLORMAP
     
-MANY WAYS TO DO THIS
+MANY WAYS TO DO THIS - introduce a few ways
+What to be aware of? What is best? There are many algorithms but probably best is just to be monotonically increasing in luminance
 
+\end{frame}
+
+\begin{frame}[t]\frametitle{matplotlib Colormaps in Grey Scale}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\textwidth]{figures/bwDiverging}
+    \end{figure}
+\end{frame}
+\begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\textwidth]{figures/bwMiscellaneous}
+    \end{figure}
+\end{frame}
+\begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\textwidth]{figures/bwQualitative}
+    \end{figure}
+\end{frame}
+\begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/bwSequential}
+    \end{figure}
+\end{frame}
+\begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\textwidth]{figures/bwSequential2}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[t]\frametitle{Color Blindness}
@@ -192,6 +223,7 @@ MANY WAYS TO DO THIS
 \begin{itemize}
     \item Matteo Niccoli: http://mycarta.wordpress.com/2012/05/29/the-rainbow-is-dead-long-live-the-rainbow-series-outline/
     \item http://www.color-blindness.com
+    \item BLACK AND WHITE ALGORITHM PLACES
     \item FILL IN
 \end{itemize}
 \end{frame}

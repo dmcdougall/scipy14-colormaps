@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 from skimage import io, color
 import pdb
 import matplotlib as mpl
-from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm, colors
+
 
 mpl.rcParams.update({'font.size': 20})
 mpl.rcParams['font.sans-serif'] = 'Arev Sans, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Helvetica, Avant Garde, sans-serif'
@@ -180,7 +182,52 @@ fig.savefig('figures/albers-bw.png')
 
 ## Make a binary colormap with geometric relationship
 
-x = np.linspace(0.0, 1.0, 100)
-
+# x = np.arange(100)
+x = np.linspace(0.0, 7.64, 100)
+# x = np.linspace(0.0, 6.15, 100)
+di = -1. #1e-20
+I0 = 100.
 L = np.zeros(100)
-L[1:] = 2**(x[-1)
+L[0] = I0
+L[1:] = I0 + 2**(x[:-1])*di
+# L -= di
+# L[L>100] = 100.
+# L = 100-L
+# L = L[::-1] #flip L
+
+lab_geometric2 = lab.copy()
+lab_geometric2[0,:,0] = L[::-1]
+rgb_geometric2 = color.lab2rgb(lab_geometric2)
+
+
+# Get binary colormap entries for full 100 entries
+cmap = 'binary'
+rgb = cm.get_cmap(cmap)(np.linspace(0.0, 1.0, 100))[np.newaxis,:,:3]
+lab = color.rgb2lab(rgb)
+
+# Make my new colormap
+ind = rgb_geometric2>1.
+rgb_geometric2[ind] = 1.
+ind = rgb_geometric2<0.
+rgb_geometric2[ind] = 0.
+# red = rgb_geometric2[:,:,0]; red[0,0] = 1. # numbers aren't exactly 1
+# red = tuple(map(tuple, red))
+# green = rgb_geometric2[:,:,1]; green[0,0] = 1.
+# green = tuple(map(tuple, green))
+# blue = rgb_geometric2[:,:,2]; blue[0,0] = 1.
+# blue = tuple(map(tuple, blue))
+# cdict = {'red':red, 'green':green, 'blue':blue}
+# my_cmap = colors.LinearSegmentedColormap('my_colormap', cdict, 100)
+my_cmap = colors.ListedColormap(rgb_geometric2[0,::-1,:])#, name='my_name')
+
+# plot colormaps with pyramid to test
+giza = np.loadtxt('giza.txt')
+x = np.linspace(1, 756, giza.shape[0]);
+y = x.copy()
+X, Y = np.meshgrid(x, y)
+
+fig = plt.figure(figsize=(16,8))
+ax = fig.add_subplot(1,2,1, projection='3d')
+ax.plot_surface(X, Y, giza, cmap='binary_r', linewidth=0)
+ax = fig.add_subplot(1,2,2, projection='3d')
+ax.plot_surface(X, Y, giza, cmap=my_cmap, linewidth=0)
