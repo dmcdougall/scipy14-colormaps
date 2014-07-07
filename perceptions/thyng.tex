@@ -100,7 +100,7 @@
     \tiny{http://matplotlib.org/examples/color/colormaps\_reference.html}}
 \end{frame}
 
-\begin{frame}[t]\frametitle{Perceived Lightness: Weber-Fechner Law}
+\begin{frame}[t]\frametitle{Perceived Lightness: Weber-Fechner Law (and Stevens)}
     \vskip-2ex
     \begin{figure}[htbp]
         \centering
@@ -118,18 +118,15 @@
     \end{figure}
 \end{frame}
 
-% \begin{frame}[t]\frametitle{Harmonic Colors}
-    
-% MAYBE DO THIS TO INCLUDE HUE
-
-% \end{frame}
-
-\begin{frame}[t]\frametitle{Printing to Grey Scale}
-% MATTERS ESPECIALLY FOR DIVERGING COLORMAPS AS LONG AS LIGHTNESS IS MONOTONICALLY INCREASING IN SEQUENTIAL COLORMAP
-    
-MANY WAYS TO DO THIS - introduce a few ways
-What to be aware of? What is best? There are many algorithms but probably best is just to be monotonically increasing in luminance
-
+\begin{frame}[t]\frametitle{Printing to Grayscale}
+    \begin{itemize}
+        \item {\Large Lots of ways to convert to grayscale}
+        \item[]
+        \item {\Large Gray = (Red * 0.2126 + Green * 0.7152 + Blue * 0.0722) (or similar$^*$)}
+        \item[]
+        \item {\Large Use luminance}
+    \end{itemize}
+    {\tiny $^*$ http://www.tannerhelland.com/3643/grayscale-image-algorithm-vb6/}
 \end{frame}
 
 \begin{frame}[t]\frametitle{matplotlib Colormaps in Grey Scale}
@@ -212,19 +209,27 @@ What to be aware of? What is best? There are many algorithms but probably best i
     \tiny{http://aspnetresources.com/tools/colorBlindness}
 \end{frame}
 
-\begin{frame}[t]\frametitle{Recommendations}
+\begin{frame}[c]\frametitle{Recommendations}
 \begin{itemize}
     \item Best colormap depends on application, but for form information, perceptual colormaps are best
-    \item Colormap for best lightness perception, hue combination, printing to grey, and color blindness? FILL IN
+    \item[] ~
+    \item Perceptual colormaps monotonically increase with lightness
+    \item[] ~
+    \item Not clear (to me) what functional relationship with L is best
+    \item[] ~
+    \item Many ways to convert to grayscale --- luminance is a good proxy to decide on a good map
+    \item[] ~
+    \item Most common color blindness problem is red-green --- try to avoid for reaching audiences most effectively
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]\frametitle{Resources}
+\begin{frame}[c]\frametitle{Resources}
 \begin{itemize}
-    \item Matteo Niccoli: http://mycarta.wordpress.com/2012/05/29/the-rainbow-is-dead-long-live-the-rainbow-series-outline/
-    \item http://www.color-blindness.com
-    \item BLACK AND WHITE ALGORITHM PLACES
-    \item FILL IN
+    \item[] All around helpful information on colormaps: \\Matteo Niccoli: http://mycarta.wordpress.com/2012/05/29/the-rainbow-is-dead-long-live-the-rainbow-series-outline/
+    \item[] ~
+    \item[] Comparison of 7 methods of converting to grayscale: http://www.tannerhelland.com/3643/grayscale-image-algorithm-vb6/
+    \item[] ~
+    \item[] Color blindness: http://www.color-blindness.com
 \end{itemize}
 \end{frame}
 
