@@ -27,7 +27,7 @@
 %}
 \setbeamertemplate{headline}{}
 
-\title[SciPy 2014]{Perceptions of Matplotlib colormaps}
+\title[SciPy 2014]{Perceptions of matplotlib colormaps}
 
 \author{Kristen M. Thyng}
 \date{July 10, 2014}
@@ -80,7 +80,10 @@
         \only<1>{
         \includegraphics[width=0.45\textwidth]{figures/seq}
         \includegraphics[width=0.45\textwidth]{figures/seq2}}
-        \only<2>{\includegraphics[width=\textwidth]{figures/lightness-sequential}}
+        \only<2>{
+        \includegraphics[width=\textwidth]{figures/Sequential} \\
+        \includegraphics[width=\textwidth]{figures/Sequential2}
+        }
     \end{figure}
     \only<1>{
     \vskip8ex
@@ -88,13 +91,18 @@
 \end{frame}
 
 \begin{frame}[t]\frametitle{Lightness of matplotlib Colormaps}
+    \vskip-2ex
     \begin{figure}[htbp]
         \centering
         \only<1>{
         \includegraphics[width=0.45\textwidth]{figures/div}
         \includegraphics[width=0.45\textwidth]{figures/qual}\\
         \includegraphics[width=0.45\textwidth]{figures/misc}}
-        \only<2>{\includegraphics[width=\textwidth]{figures/lightness-rest}}
+        \only<2>{
+        \includegraphics[width=0.8\textwidth]{figures/Diverging} \\
+        \includegraphics[width=0.8\textwidth]{figures/Qualitative} \\
+        \includegraphics[width=0.8\textwidth]{figures/Miscellaneous}
+        }
     \end{figure}
     \only<1>{
     \tiny{http://matplotlib.org/examples/color/colormaps\_reference.html}}
@@ -113,7 +121,7 @@
 \begin{frame}[t]\frametitle{Improvement to Binary Colormap?}
     \begin{figure}[htbp]
         \centering
-        \only<1>{\includegraphics[width=\textwidth]{figures/lightness-sequential}}
+        \only<1>{\includegraphics[width=\textwidth]{figures/Sequential}}
         \only<2>{\includegraphics[width=0.8\textwidth]{figures/albers-bw}}
     \end{figure}
 \end{frame}
@@ -126,19 +134,26 @@
         \item[]
         \item {\Large Use luminance}
     \end{itemize}
+    \vskip20ex
     {\tiny $^*$ http://www.tannerhelland.com/3643/grayscale-image-algorithm-vb6/}
 \end{frame}
 
 \begin{frame}[t]\frametitle{matplotlib Colormaps in Grey Scale}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=\textwidth]{figures/bwDiverging}
+        \includegraphics[width=0.7\textwidth]{figures/bwSequential}
     \end{figure}
 \end{frame}
 \begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=\textwidth]{figures/bwMiscellaneous}
+        \includegraphics[width=\textwidth]{figures/bwSequential2}
+    \end{figure}
+\end{frame}
+\begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\textwidth]{figures/bwDiverging}
     \end{figure}
 \end{frame}
 \begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
@@ -150,13 +165,7 @@
 \begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.7\textwidth]{figures/bwSequential}
-    \end{figure}
-\end{frame}
-\begin{frame}[t,noframenumbering]\frametitle{matplotlib Colormaps in Grey Scale}
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=\textwidth]{figures/bwSequential2}
+        \includegraphics[width=\textwidth]{figures/bwMiscellaneous}
     \end{figure}
 \end{frame}
 
@@ -176,11 +185,10 @@
 \end{frame}
 \begin{frame}[t]\frametitle{Color Blindness}
     \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.49\textwidth]{figures/misc}
-        \includegraphics[width=0.49\textwidth]{figures/misc_deuteranopia}
+        \includegraphics[width=0.49\textwidth]{figures/seq}
+        \includegraphics[width=0.49\textwidth]{figures/seq_deuteranopia}
     \end{figure}
-    \vskip16ex
+    \vskip8ex
     \tiny{http://aspnetresources.com/tools/colorBlindness}
 \end{frame}
 \begin{frame}[t]\frametitle{Color Blindness}
@@ -202,10 +210,11 @@
 \end{frame}
 \begin{frame}[t]\frametitle{Color Blindness}
     \begin{figure}[htbp]
-        \includegraphics[width=0.49\textwidth]{figures/seq}
-        \includegraphics[width=0.49\textwidth]{figures/seq_deuteranopia}
+        \centering
+        \includegraphics[width=0.49\textwidth]{figures/misc}
+        \includegraphics[width=0.49\textwidth]{figures/misc_deuteranopia}
     \end{figure}
-    \vskip8ex
+    \vskip16ex
     \tiny{http://aspnetresources.com/tools/colorBlindness}
 \end{frame}
 

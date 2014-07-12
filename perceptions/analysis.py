@@ -1,3 +1,8 @@
+'''
+For each colormap, plot the lightness parameter L* from CIELAB colorspace along the y axis vs index through the colormap. Colormaps are examined in categories as in the original matplotlib gallery of colormaps.
+'''
+
+
 from skimage import io, color
 import numpy as np
 import matplotlib.pyplot as plt
@@ -18,21 +23,13 @@ mpl.rcParams['mathtext.sf'] = 'sans'
 mpl.rcParams['mathtext.fallback_to_cm'] = 'True'
 
 
-## Get colormaps, from http://matplotlib.org/1.2.1/examples/pylab_examples/show_colormaps.html
-
-# Get a list of the colormaps in matplotlib.  Ignore the ones that end with
-# '_r' because these are simply reversed versions of ones that don't end
-# with '_r'
-maps = sorted(m for m in plt.cm.datad if not m.endswith("_r"))
-nmaps = len(maps) + 1
-
-# OR, to have colormaps separated into categories: http://matplotlib.org/examples/color/colormaps_reference.html
+# Have colormaps separated into categories: http://matplotlib.org/examples/color/colormaps_reference.html
 
 cmaps = [('Sequential',     ['binary', 'Blues', 'BuGn', 'BuPu', 'gist_yarg',
                              'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd',
                              'PuBu', 'PuBuGn', 'PuRd', 'Purples', 'RdPu',
                              'Reds', 'YlGn', 'YlGnBu', 'YlOrBr', 'YlOrRd']),
-         ('Sequential (2)', ['afmhot', 'autumn', 'bone', 'cool', 'copper',
+         ('Sequential2', ['afmhot', 'autumn', 'bone', 'cool', 'copper',
                              'gist_gray', 'gist_heat', 'gray', 'hot', 'pink',
                              'spring', 'summer', 'winter']),
          ('Diverging',      ['BrBG', 'bwr', 'coolwarm', 'PiYG', 'PRGn', 'PuOr',
@@ -44,128 +41,72 @@ cmaps = [('Sequential',     ['binary', 'Blues', 'BuGn', 'BuPu', 'gist_yarg',
                              'gnuplot', 'gnuplot2', 'ocean', 'rainbow',
                              'terrain', 'flag', 'prism'])]
 
-ncmaps = len(cmaps)
-        
+# indices to step through colormap        
 x = np.linspace(0.0, 1.0, 100)
 
-## Sequential colormaps
-
-fig = plt.figure(figsize=(18,8))
-
-# loop through maps
-# for i,m in enumerate(maps):
-i = 1
+# Do plot
 for cmap_category, cmap_list in cmaps:
 
-    if 'Sequential' not in cmap_category:
-        continue
+    fig = plt.figure(figsize=(18,5))
+    ax = fig.add_subplot(111)
 
-    flag = True
+    ax.set_ylabel('Lightness $L^*$', fontsize=18)
 
-    ax = fig.add_subplot(2, 1, i)
-    if i==1:
-        ax.set_title('Lightness $L^*$ along colormap index', fontsize=18)
+    locs = [] # locations for text labels
     
     for j, cmap in enumerate(cmap_list):
 
         # Get rgb values for colormap
         rgb = cm.get_cmap(cmap)(x)[np.newaxis,:,:3]
-        # hsv = matplotlib.colors.rgb_to_hsv(rgb).squeeze()
 
         # Get colormap in CIE LAB. We want the L here.
         lab = color.rgb2lab(rgb)
-
-        # if cmap=='binary':
-            # pdb.set_trace()
+        L = lab[0,:,0]
 
         # Plot colormap L values
-        if '(2)' in cmap_category:
-            ax.scatter(x+j*0.83, lab[0,:,0], c=x, cmap=cmap, s=300, linewidths=0.1)
-            ax.set_ylabel('Sequential MatLab', fontsize=18)
-            ax.axis([0,11,0,100])
-        else:
-            ax.scatter(x+j*0.5, lab[0,::-1,0], c=x, cmap=cmap + '_r', s=300, linewidths=0.1)
-            ax.set_ylabel('Sequential', fontsize=18)
-            ax.axis([0,10.5,0,100])
+        # Do separately for each category so each plot can be pretty
+        # to make scatter markers change color along plot: http://stackoverflow.com/questions/8202605/matplotlib-scatterplot-colour-as-a-function-of-a-third-variable
+        if cmap_category=='Sequential':
+            dc = 0.6 # spacing between colormaps
+            ax.scatter(x+j*dc, lab[0,::-1,0], c=x, cmap=cmap + '_r', s=300, linewidths=0.)
+            ax.axis([-0.1,12.6,0,100])
+            locs.append(x[-1]+j*dc) # store locations for colormap labels
+
+        elif cmap_category=='Sequential2':
+            dc = 1.5
+            ax.scatter(x+j*dc, lab[0,:,0], c=x, cmap=cmap, s=300, linewidths=0.)
+            ax.axis([-0.1,19.6,0,100])
+            locs.append(x[-1]+j*dc) # store locations for colormap labels
+
+        elif cmap_category=='Diverging':
+            dc = 1.2
+            ax.scatter(x+j*dc, lab[0,:,0], c=x, cmap=cmap, s=300, linewidths=0.)
+            ax.axis([-0.1,13.1,0,100])
+            locs.append(x[int(x.size/2.)]+j*dc) # store locations for colormap labels
+
+        elif cmap_category=='Qualitative':
+            dc = 1.3
+            ax.scatter(x+j*dc, lab[0,:,0], c=x, cmap=cmap, s=300, linewidths=0.)
+            ax.axis([-0.1,13.1,0,100])
+            locs.append(x[int(x.size/2.)]+j*dc) # store locations for colormap labels
+
+        elif cmap_category=='Miscellaneous':
+            dc = 1.5
+            ax.scatter(x+j*dc, lab[0,:,0], c=x, cmap=cmap, s=300, linewidths=0.)
+            ax.axis([-0.1,22.1,0,100])
+            locs.append(x[int(x.size/2.)]+j*dc) # store locations for colormap labels
     
-        ax.get_xaxis().set_ticks([])
+    # Set up labels for colormaps
+    ax.xaxis.set_ticks_position('top')
+    ticker = mpl.ticker.FixedLocator(locs)
+    ax.xaxis.set_major_locator(ticker)
+    formatter = mpl.ticker.FixedFormatter(cmap_list)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.set_xlabel(cmap_category + ' colormaps', fontsize=22)
+    labels = ax.get_xticklabels()
+    for label in labels:
+        label.set_rotation(60)
 
-    i += 1
-
-fig.subplots_adjust(left=0.04, right=0.99, bottom=0.05, top=0.93, hspace=0.1)
-fig.show()
-
-fig.savefig('figures/lightness-sequential.png')
-
-
-## Non-sequential colormaps
-
-fig = plt.figure(figsize=(18,10))
-
-# loop through maps
-# for i,m in enumerate(maps):
-i = 1
-for cmap_category, cmap_list in cmaps:
-
-    if 'Sequential' in cmap_category:
-        continue
-
-    flag = True
-
-    ax = fig.add_subplot(3, 1, i)
-    if i==1:
-        ax.set_title('Lightness $L^*$ along colormap index', fontsize=18)
-    
-    for j, cmap in enumerate(cmap_list):
-
-        # Get rgb values for colormap
-        rgb = cm.get_cmap(cmap)(x)[np.newaxis,:,:3]
-        # hsv = matplotlib.colors.rgb_to_hsv(rgb).squeeze()
-
-        # Get colormap in CIE LAB. We want the L here.
-        lab = color.rgb2lab(rgb)
-
-        # Plot colormap L values
-        if 'Qualitative' in cmap_category:
-            ax.scatter(x+j*1.3, lab[0,:,0], c=x, cmap=cmap, s=300, linewidths=0.1)
-            ax.axis([0,13,0,100])
-        elif 'Diverging' in cmap_category:
-            ax.scatter(x+j*1.2, lab[0,::-1,0], c=x, cmap=cmap + '_r', s=300, linewidths=0.1)
-            ax.axis([0,13,0,100])
-        elif 'Miscellaneous' in cmap_category:
-            ax.scatter(x+j*1.5, lab[0,::-1,0], c=x, cmap=cmap + '_r', s=300, linewidths=0.1)
-            ax.axis([0,22,0,100])
-
-        ax.get_xaxis().set_ticks([])
-        ax.set_ylabel(cmap_category, fontsize=18)
-
-    i += 1
-
-fig.subplots_adjust(left=0.04, right=0.99, bottom=0.03, top=0.95, hspace=0.1)
-fig.show()
-fig.savefig('figures/lightness-rest.png')
-
-# can't figure out this part. Curve fitting isn't looking right.
-
-# ## Sequential colormap L* curve fitting
-
-# def func(x, a, b, c):
-#     return c + a * x ** b
-
-# # xdata = np.linspace(0, 4, 50)
-
-# # Loop through sequential colormaps and calculate the curve fit
-# # Then paste the exponent on the plot for each.
-# for j, cmap in enumerate(cmaps[0][1]): # Sequential colormaps
-
-#     # Get rgb values for colormap
-#     rgb = cm.get_cmap(cmap + '_r')(x)[np.newaxis,:,:3]
-
-#     # Get colormap in CIE LAB. We want the L here.
-#     lab = color.rgb2lab(rgb)
-
-#     popt, pcov = curve_fit(func, x, lab[0,:,0])
-
-#     print cmap, popt[1]
-
-#     # pdb.set_trace()
+    fig.tight_layout()
+    fig.savefig('figures/' + cmap_category + '.png', dpi=100)
+    plt.close(fig)
